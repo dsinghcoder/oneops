@@ -41,7 +41,7 @@ public class AzureServiceBus {
   @Autowired
   Environment environment;
 
-  @Value("${AzureServiceBus.IsAzureServiceBusIntegrationEnabled:false}")
+  @Value("${IsAzureSvcBusIntegrationEnabled:false}")
   private boolean isAzureServiceBusIntegrationEnabled;
 
 
@@ -101,10 +101,10 @@ public class AzureServiceBus {
         logger.info("intializing Azure Service Bus...");
         logger.info("environment: " + environment);
 
-        String CONNECTION_NAME = environment.getProperty("AzureServiceBus.ConnectionString", "");
-        String sasKeyName = environment.getProperty("AzureServiceBus.SasKeyName", "");
-        String sasKey = environment.getProperty("AzureServiceBus.SasKey", "");
-        String QUEUE_NAME = environment.getProperty("AzureServiceBus.MonitoringQueue", "");
+        String CONNECTION_NAME = environment.getProperty("AzureSvcBusConnString", "");
+        String sasKeyName = environment.getProperty("AzureSvcBusSasKeyName", "");
+        String sasKey = environment.getProperty("AzureSvcBusSasKey", "");
+        String QUEUE_NAME = environment.getProperty("AzureSvcBusMonitoringQueue", "");
 
         logger.info("Connection Properties: <CONNECTION_NAME> " + CONNECTION_NAME + " <sasKeyName> "
             + sasKeyName + " <QUEUE_NAME>" + QUEUE_NAME);
