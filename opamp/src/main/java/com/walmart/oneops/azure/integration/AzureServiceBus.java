@@ -98,7 +98,7 @@ public class AzureServiceBus {
     try {
       if (isAzureServiceBusIntegrationEnabled) {
 
-        logger.info("intializing Azure Service Bus...");
+        logger.info("Initializing Azure Service Bus...");
         logger.info("environment: " + environment);
 
         String CONNECTION_NAME = environment.getProperty("AzureSvcBusConnString", "");
@@ -115,9 +115,9 @@ public class AzureServiceBus {
         properties.put("connectionfactory." + CONNECTION_JNDI_NAME, CONNECTION_NAME);
         properties.put("queue." + QUEUE_JNDI_NAME, QUEUE_NAME);
 
-        logger.info("Iniializing Context..");
+        logger.info("Initializing Context..");
         Context context = new InitialContext(properties);
-        logger.info("Iniialized Context..");
+        logger.info("Initialized Context..");
 
         ConnectionFactory cf = (ConnectionFactory) context.lookup(CONNECTION_JNDI_NAME);
 
