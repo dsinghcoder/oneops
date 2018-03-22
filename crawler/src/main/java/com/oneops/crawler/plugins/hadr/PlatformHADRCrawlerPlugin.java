@@ -29,7 +29,7 @@ public class PlatformHADRCrawlerPlugin extends AbstractCrawlerPlugin {
   private String prodDataCentersList;
   private String[] dataCentersArr;
   private String oo_baseUrl;
-  final String hadrElasticSearchIndexName = "hadr"; 
+  final String hadrElasticSearchIndexName = "hadr_test"; //TODO: change back to hadr 
   private SearchDal searchDal;
   private String environmentProfileFilter;
 
@@ -136,7 +136,9 @@ public class PlatformHADRCrawlerPlugin extends AbstractCrawlerPlugin {
     String orginzationName = CommonsUtil.parseOrganizationNameFromNsPath(platform.getPath());
     platformHADRRecord.setOrg(orginzationName);
     platformHADRRecord.setOrganization(organizationsMapCache.get(orginzationName));
-
+    platformHADRRecord.setIsAutoReplaceEnabled(platform.isAutoReplaceEnabled() ? "autoReplaceEnabled" : "autoReplaceDisabled");
+    platformHADRRecord.setIsAutoRepairEnabled(platform.isAutoRepairEnabled() ? "autoRepairEnabled" : "autoRepairDisabled"); 
+    
     if (isHadrEsEnabled) {
       log.info("Sending compliance record to Elastic Search");
       saveToElasticSearch(platformHADRRecord, String.valueOf(platform.getId()));

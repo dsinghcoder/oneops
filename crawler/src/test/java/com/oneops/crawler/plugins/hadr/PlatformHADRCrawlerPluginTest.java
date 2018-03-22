@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.jooq.util.derby.sys.tables.Syskeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
@@ -28,7 +29,7 @@ public class PlatformHADRCrawlerPluginTest {
     System.setProperty("hadr.oo.baseurl", "https://oneops.prod.org.com");
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void test_ReadConfig() {
     plugin = new PlatformHADRCrawlerPlugin();
 
@@ -38,7 +39,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_IsDR() {
     plugin = new PlatformHADRCrawlerPlugin();
     Platform platform = new Platform();
@@ -52,7 +53,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_IsNonDR() {
     plugin = new PlatformHADRCrawlerPlugin();
     Platform platform = new Platform();
@@ -64,7 +65,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_IsHA() {
     plugin = new PlatformHADRCrawlerPlugin();
     Platform platform = new Platform();
@@ -77,7 +78,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_IsNonHA() {
     plugin = new PlatformHADRCrawlerPlugin();
     Platform platform = new Platform();
@@ -88,7 +89,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_parseAssemblyNameFromNsPath() {
     plugin = new PlatformHADRCrawlerPlugin();
     String nsPath = "/orgname/assemblyname/platformname/bom/env-dev/1";
@@ -96,7 +97,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_getOOURL() {
     System.setProperty("hadr.oo.baseurl", "https://oneops.prod.org.com");
     plugin = new PlatformHADRCrawlerPlugin();
@@ -107,7 +108,7 @@ public class PlatformHADRCrawlerPluginTest {
 
   }
 
-  @Test(enabled = true)
+  @Test(enabled = false)
   private void test_getOOURL_DefaultToBlank() {
     System.clearProperty("hadr.oo.baseurl");
     plugin = new PlatformHADRCrawlerPlugin();
@@ -168,4 +169,16 @@ public class PlatformHADRCrawlerPluginTest {
     plugin.saveToElasticSearch(platformHADRRecord, "1");
 
   }
+  
+  @Test(enabled = true)
+  private void test() {
+
+    Boolean bool = new Boolean("tRuE");
+    System.out.println("bool: "+bool);
+    System.out.println("bool: "+ (bool ? "enabled" : "disabled"));
+    
+    assertEquals(true, true);
+
+  }
+  
 }

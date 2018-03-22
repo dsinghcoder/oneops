@@ -143,8 +143,8 @@ public class CMSCrawler {
             init(conn);
             List<Environment> envs = getOneopsEnvironments(conn);
             Map<String, Organization> organizationsMapCache = populateOrganizations(conn);// caching organizations data
-            EnvTTLCrawlerPlugin ttlPlugin = new EnvTTLCrawlerPlugin(); //TODO: auto-discover plugins from jars
-            ttlPlugin.init();
+           // EnvTTLCrawlerPlugin ttlPlugin = new EnvTTLCrawlerPlugin(); //TODO: auto-discover plugins from jars
+            //ttlPlugin.init();
             PlatformHADRCrawlerPlugin platformHADRCrawlerPlugin = new PlatformHADRCrawlerPlugin();
             long envsLastFetchedAt = System.currentTimeMillis();
 
@@ -153,7 +153,7 @@ public class CMSCrawler {
                     envs = getOneopsEnvironments(conn);//refresh the environment list
                     organizationsMapCache = populateOrganizations(conn);// refreshing cache
                 }
-                ttlPlugin.cleanup(); //from previous run
+                //ttlPlugin.cleanup(); //from previous run
                 log.info("Starting to crawl all environments.. Total # " + envs.size());
                 for (Environment env : envs) {
                     if (shutDownRequested) {
@@ -162,7 +162,7 @@ public class CMSCrawler {
                     }
                     populateEnv(env, conn);
                     List<Deployment> deployments = getDeployments(conn, env);
-                    ttlPlugin.processEnvironment(env, deployments, organizationsMapCache);
+                   // ttlPlugin.processEnvironment(env, deployments, organizationsMapCache);
                     platformHADRCrawlerPlugin.processEnvironment(env, organizationsMapCache);
                     updateCrawlEntry(env);
                 }
@@ -442,7 +442,13 @@ public class CMSCrawler {
                 platform.setSource(attribute.getValue(CM_CI_ATTRIBUTES.DF_ATTRIBUTE_VALUE));
             } else if (attributeName.equalsIgnoreCase("pack")) {
                 platform.setPack(attribute.getValue(CM_CI_ATTRIBUTES.DF_ATTRIBUTE_VALUE));
-            }
+            } else if (attributeName.equalsIgnoreCase("autorepair")) {
+              platform.setAutoRepairEnabled(new Boolean(attribute.getValue(CM_CI_ATTRIBUTES.DF_ATTRIBUTE_VALUE)));
+            } else if (attributeName.equalsIgnoreCase("autoreplace")) {
+                platform.setAutoReplaceEnabled(new Boolean(attribute.getValue(CM_CI_ATTRIBUTES.DF_ATTRIBUTE_VALUE)));
+              }
+            
+            // TODO: add autoscale & autorepair 
         }
         //Now set the enable/disable status
         //select * from cm_ci_relation_attributes where ci_relation_id=composedOfRelationId

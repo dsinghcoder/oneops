@@ -34,6 +34,9 @@ public class PlatformHADRRecord implements Serializable {
   private transient Map<String, Cloud> cloudsMap;
   private transient List<Cloud> clouds; // TODO: Need to finalize if we will use this object in ES
   private Organization organization;
+  private String isAutoReplaceEnabled;
+  private String isAutoRepairEnabled;
+  
 
 
 
@@ -211,6 +214,22 @@ public class PlatformHADRRecord implements Serializable {
 
   public void setIsHA(String isHA) {
     this.isHA = isHA;
+  }
+
+  public String getIsAutoReplaceEnabled() {
+    return isAutoReplaceEnabled;
+  }
+
+  public void setIsAutoReplaceEnabled(String isAutoReplaceEnabled) {
+    this.isAutoReplaceEnabled = isAutoReplaceEnabled;
+  }
+
+  public String getIsAutoRepairEnabled() {
+    return isAutoRepairEnabled;
+  }
+
+  public void setIsAutoRepairEnabled(String isAutoRepairEnabled) {
+    this.isAutoRepairEnabled = isAutoRepairEnabled;
   }
 
 }
